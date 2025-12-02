@@ -1,6 +1,6 @@
 package com.example.inventory_service.controller;
 
-import com.example.inventory_service.entity.InventoryDTO;
+import com.example.shared_contracts.dtos.InventoryDTO;
 import com.example.inventory_service.entity.InventoryMapper;
 import com.example.inventory_service.service.IInventoryService;
 import org.springframework.http.ResponseEntity;
