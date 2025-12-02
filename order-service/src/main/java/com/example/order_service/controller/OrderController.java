@@ -3,6 +3,7 @@ package com.example.order_service.controller;
 import com.example.order_service.client.ProductClient;
 import com.example.order_service.entity.OrderDTO;
 import com.example.order_service.entity.OrderMapper;
+import com.example.order_service.service.IOrderService;
 import com.example.order_service.service.OrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/orders")
 public class OrderController {
-    private final OrderService service;
+    private final IOrderService service;
     private final ProductClient productClient;
     private final OrderMapper mapper;
     public OrderController(OrderService service, ProductClient productClient, OrderMapper mapper) {
