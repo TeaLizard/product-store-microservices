@@ -8,16 +8,13 @@ import java.util.List;
 @Table(name = "cart")
 public class Cart {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToMany
-    @JoinTable(
-            name = "cart_items",
-            joinColumns = @JoinColumn(name = "cart_id"),
-            inverseJoinColumns = @JoinColumn(name = "shoe_id")
-    )
-    private List<Product> shoes;
+    @ElementCollection
+    @CollectionTable(name = "cart_items", joinColumns = @JoinColumn(name = "cart_id"))
+    @Column(name = "product_id")
+    private List<Integer> productIds;
 
     public Cart() {}
 
@@ -28,10 +25,10 @@ public class Cart {
         this.id = id;
     }
 
-    public List<Product> getShoes() {
-        return shoes;
+    public List<Integer> getProductIds() {
+        return productIds;
     }
-    public void setShoes(List<Product> shoes) {
-        this.shoes = shoes;
+    public void setShoes(List<Integer> productIds) {
+        this.productIds = productIds;
     }
 }

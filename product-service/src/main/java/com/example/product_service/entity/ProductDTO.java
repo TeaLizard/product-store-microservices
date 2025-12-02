@@ -1,38 +1,14 @@
 package com.example.product_service.entity;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-
-@Entity(name = "products")
-@Table(name = "products")
-public class Product {
-    @Id
-    @GeneratedValue
+public class ProductDTO {
     private Integer id;
-
-    @NotBlank
-    @Column(nullable = false)
     private String name;
-
-    @Column(columnDefinition = "TEXT")
     private String description;
-
-    @NotNull
-    @DecimalMin("0.0")
-    @Column(nullable = false)
     private Double price;
-
-    @NotBlank
-    @Column(nullable = false, unique = true)
     private String sku;
-
-    @NotBlank
-    @Column(nullable = false, unique = true, columnDefinition = "TEXT")
     private String image;
 
-    public Product() {}
+    public ProductDTO() {}
 
     public Integer getId() {
         return id;
