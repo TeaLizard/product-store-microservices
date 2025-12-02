@@ -1,7 +1,7 @@
 package com.example.order_service.controller;
 
 import com.example.order_service.client.ProductClient;
-import com.example.order_service.entity.OrderDTO;
+import com.example.shared_contracts.dtos.OrderDTO;
 import com.example.order_service.entity.OrderMapper;
 import com.example.order_service.service.IOrderService;
 import com.example.order_service.service.OrderService;

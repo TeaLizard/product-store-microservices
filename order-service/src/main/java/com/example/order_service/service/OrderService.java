@@ -2,7 +2,7 @@ package com.example.order_service.service;
 
 import com.example.order_service.client.ProductClient;
 import com.example.order_service.entity.Order;
-import com.example.order_service.entity.OrderDTO;
+import com.example.shared_contracts.dtos.OrderDTO;
 import com.example.order_service.exeption.NotFoundException;
 import com.example.order_service.repository.OrderRepository;
 import org.springframework.stereotype.Service;

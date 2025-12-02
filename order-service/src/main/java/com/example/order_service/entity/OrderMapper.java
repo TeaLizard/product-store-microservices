@@ -1,6 +1,8 @@
 package com.example.order_service.entity;
 
 import com.example.order_service.client.ProductClient;
+import com.example.shared_contracts.dtos.OrderDTO;
+import com.example.shared_contracts.dtos.ProductDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 

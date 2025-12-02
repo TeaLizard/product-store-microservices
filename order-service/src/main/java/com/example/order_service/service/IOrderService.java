@@ -1,7 +1,7 @@
 package com.example.order_service.service;
 
 import com.example.order_service.entity.Order;
-import com.example.order_service.entity.OrderDTO;
+import com.example.shared_contracts.dtos.OrderDTO;
 
 import java.util.List;
 
