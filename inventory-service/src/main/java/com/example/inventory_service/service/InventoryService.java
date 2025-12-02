@@ -1,7 +1,7 @@
 package com.example.inventory_service.service;
 
 import com.example.inventory_service.entity.Inventory;
-import com.example.inventory_service.entity.InventoryDTO;
+import com.example.shared_contracts.dtos.InventoryDTO;
 import com.example.inventory_service.exeption.NotFoundException;
 import com.example.inventory_service.repository.InventoryRepository;
 import org.springframework.stereotype.Service;

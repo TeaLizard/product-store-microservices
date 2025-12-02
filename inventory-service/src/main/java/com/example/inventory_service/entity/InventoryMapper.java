@@ -1,5 +1,6 @@
 package com.example.inventory_service.entity;
 
+import com.example.shared_contracts.dtos.InventoryDTO;
 import org.springframework.stereotype.Component;
 
 @Component

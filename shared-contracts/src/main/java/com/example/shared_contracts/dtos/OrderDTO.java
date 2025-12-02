@@ -1,8 +1,4 @@
-package com.example.order_service.entity;
-
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+package com.example.shared_contracts.dtos;
 
 import java.util.List;
 

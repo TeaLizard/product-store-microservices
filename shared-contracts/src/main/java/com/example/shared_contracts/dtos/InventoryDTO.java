@@ -1,4 +1,4 @@
-package com.example.inventory_service.entity;
+package com.example.shared_contracts.dtos;
 
 public class InventoryDTO {
     private Integer productId;
