@@ -28,6 +28,7 @@ public class OrderController {
     @PostMapping
     ResponseEntity<OrderDTO> createOrder(@RequestBody OrderDTO orderDTO) {
         var order = mapper.toEntity(orderDTO);
+        order.setId(null);
         var out = service.add(order);
         return ResponseEntity.ok(mapper.toDTO(out));
     }
