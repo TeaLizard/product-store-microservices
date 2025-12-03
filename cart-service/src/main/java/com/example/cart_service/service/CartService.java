@@ -60,24 +60,23 @@ public class CartService implements ICartService {
     }
 
     @Override
-    public ProductDTO addToCart(ProductDTO productDTO) {
+    public void addToCart(Integer productId) {
         var old = repository.findById(CART_ID).orElseThrow(
                 () -> new NotFoundException("Cart", CART_ID)
         );
         var productsIds = old.getProductIds();
-        productsIds.add(productDTO.getId());
+        productsIds.add(productId);
         old.setProductIds(productsIds);
         repository.save(old);
-        return productDTO;
     }
 
     @Override
-    public void removeFromCart(ProductDTO productDTO) {
+    public void removeFromCart(Integer productId) {
         var old = repository.findById(CART_ID).orElseThrow(
                 () -> new NotFoundException("Cart", CART_ID)
         );
         var productsIds = old.getProductIds();
-        productsIds.remove(productDTO.getId());
+        productsIds.remove(productId);
         old.setProductIds(productsIds);
         repository.save(old);
     }
