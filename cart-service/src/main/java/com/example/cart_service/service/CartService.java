@@ -1,0 +1,95 @@
+package com.example.cart_service.service;
+
+import com.example.cart_service.client.OrderClient;
+import com.example.cart_service.entity.Cart;
+import com.example.cart_service.exeption.NotFoundException;
+import com.example.cart_service.repository.CartRepository;
+import com.example.shared_contracts.dtos.ProductDTO;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class CartService implements ICartService {
+    private final int CART_ID = 1;
+    private final CartRepository repository;
+    private final OrderClient orderClient;
+    public CartService(CartRepository repository, OrderClient orderClient) {
+        this.repository = repository;
+        this.orderClient = orderClient;
+        initCart();
+    }
+
+    @Override
+    public Cart get() {
+        return repository.findById(CART_ID).orElseThrow(
+                () -> new NotFoundException("Cart", CART_ID)
+        );
+    }
+
+    @Override
+    public Cart add(Cart cart) {
+        return repository.save(cart);
+    }
+
+    @Override
+    public void update(Cart cart) {
+        var old = repository.findById(CART_ID).orElseThrow(
+                () -> new NotFoundException("Cart", CART_ID)
+        );
+        old.setProductIds(cart.getProductIds());
+        repository.save(old);
+    }
+
+    @Override
+    public void delete(Cart cart) {
+        repository.delete(cart);
+    }
+
+    @Override
+    public ProductDTO addToCart(ProductDTO productDTO) {
+        var old = repository.findById(CART_ID).orElseThrow(
+                () -> new NotFoundException("Cart", CART_ID)
+        );
+        var productsIds = old.getProductIds();
+        productsIds.add(productDTO.getId());
+        old.setProductIds(productsIds);
+        repository.save(old);
+        return productDTO;
+    }
+
+    @Override
+    public void removeFromCart(ProductDTO productDTO) {
+        var old = repository.findById(CART_ID).orElseThrow(
+                () -> new NotFoundException("Cart", CART_ID)
+        );
+        var productsIds = old.getProductIds();
+        productsIds.remove(productDTO.getId());
+        old.setProductIds(productsIds);
+        repository.save(old);
+    }
+
+    @Override
+    public void emptyCart() {
+        var old = repository.findById(CART_ID).orElseThrow(
+                () -> new NotFoundException("Cart", CART_ID)
+        );
+        old.setProductIds(new ArrayList<>());
+        repository.save(old);
+    }
+
+    @Override
+    public void checkout() {
+
+    }
+
+    private void initCart() {
+        if (repository.count() == 0) {
+            var cart = new Cart();
+            cart.setId(CART_ID);
+            cart.setProductIds(new ArrayList<Integer>());
+            repository.save(cart);
+        }
+    }
+}
