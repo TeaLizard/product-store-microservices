@@ -28,7 +28,7 @@ public class Cart {
     public List<Integer> getProductIds() {
         return productIds;
     }
-    public void setShoes(List<Integer> productIds) {
+    public void setProductIds(List<Integer> productIds) {
         this.productIds = productIds;
     }
 }
