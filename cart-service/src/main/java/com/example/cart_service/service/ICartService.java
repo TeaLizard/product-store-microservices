@@ -1,6 +1,7 @@
 package com.example.cart_service.service;
 
 import com.example.cart_service.entity.Cart;
+import com.example.shared_contracts.dtos.OrderDTO;
 import com.example.shared_contracts.dtos.ProductDTO;
 
 public interface ICartService {
@@ -12,5 +13,5 @@ public interface ICartService {
     ProductDTO addToCart(ProductDTO productDTO);
     void removeFromCart(ProductDTO productDTO);
     void emptyCart();
-    void checkout();
+    OrderDTO checkout(String location);
 }

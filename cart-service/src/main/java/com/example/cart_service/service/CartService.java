@@ -2,8 +2,11 @@ package com.example.cart_service.service;
 
 import com.example.cart_service.client.OrderClient;
 import com.example.cart_service.entity.Cart;
+import com.example.cart_service.entity.CartMapper;
+import com.example.cart_service.entity.CartToOrderMapper;
 import com.example.cart_service.exeption.NotFoundException;
 import com.example.cart_service.repository.CartRepository;
+import com.example.shared_contracts.dtos.OrderDTO;
 import com.example.shared_contracts.dtos.ProductDTO;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +18,18 @@ public class CartService implements ICartService {
     private final int CART_ID = 1;
     private final CartRepository repository;
     private final OrderClient orderClient;
-    public CartService(CartRepository repository, OrderClient orderClient) {
+    private final CartMapper cartMapper;
+    private final CartToOrderMapper cartToOrderMapper;
+    public CartService(
+            CartRepository repository,
+            OrderClient orderClient,
+            CartMapper cartMapper,
+            CartToOrderMapper cartToOrderMapper
+    ) {
         this.repository = repository;
         this.orderClient = orderClient;
+        this.cartMapper = cartMapper;
+        this.cartToOrderMapper = cartToOrderMapper;
         initCart();
     }
 
@@ -80,8 +92,12 @@ public class CartService implements ICartService {
     }
 
     @Override
-    public void checkout() {
-
+    public OrderDTO checkout(String location) {
+        var cart = cartMapper.toDto(get());
+        var order = cartToOrderMapper.toOrderDTO(cart, location);
+        var response = orderClient.createOrder(order);
+        emptyCart();
+        return response.getBody();
     }
 
     private void initCart() {
