@@ -1,11 +1,13 @@
 package com.example.cart_service.service;
 
+import com.example.cart_service.client.InventoryClient;
 import com.example.cart_service.client.OrderClient;
 import com.example.cart_service.entity.Cart;
 import com.example.cart_service.entity.CartMapper;
 import com.example.cart_service.entity.CartToOrderMapper;
 import com.example.cart_service.exeption.NotFoundException;
 import com.example.cart_service.repository.CartRepository;
+import com.example.shared_contracts.dtos.InventoryDTO;
 import com.example.shared_contracts.dtos.OrderDTO;
 import com.example.shared_contracts.dtos.ProductDTO;
 import org.springframework.stereotype.Service;
@@ -18,16 +20,19 @@ public class CartService implements ICartService {
     private final int CART_ID = 1;
     private final CartRepository repository;
     private final OrderClient orderClient;
+    private final InventoryClient inventoryClient;
     private final CartMapper cartMapper;
     private final CartToOrderMapper cartToOrderMapper;
     public CartService(
             CartRepository repository,
             OrderClient orderClient,
+            InventoryClient inventoryClient,
             CartMapper cartMapper,
             CartToOrderMapper cartToOrderMapper
     ) {
         this.repository = repository;
         this.orderClient = orderClient;
+        this.inventoryClient = inventoryClient;
         this.cartMapper = cartMapper;
         this.cartToOrderMapper = cartToOrderMapper;
         initCart();
@@ -93,6 +98,14 @@ public class CartService implements ICartService {
     @Override
     public OrderDTO checkout(String location) {
         var cart = cartMapper.toDto(get());
+        var products = cart.getProducts();
+        for (var product : products) { // Updates inventory per product
+            var inventory = new InventoryDTO();
+            inventory.setProductId(product.getId());
+            inventory.setQuantity(product.getQuantity() - 1);
+            inventoryClient.update(product.getId(), inventory);
+        }
+
         var order = cartToOrderMapper.toOrderDTO(cart, location);
         var response = orderClient.createOrder(order);
         emptyCart();
