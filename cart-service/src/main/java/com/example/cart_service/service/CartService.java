@@ -30,14 +30,16 @@ public class CartService implements ICartService {
         this.orderClient = orderClient;
         this.cartMapper = cartMapper;
         this.cartToOrderMapper = cartToOrderMapper;
-        initCart();
     }
 
     @Override
     public Cart get() {
-        return repository.findById(CART_ID).orElseThrow(
-                () -> new NotFoundException("Cart", CART_ID)
-        );
+        return repository.findById(CART_ID).orElseGet(() -> {
+            Cart cart = new Cart();
+            cart.setId(CART_ID);
+            cart.setProductIds(new ArrayList<>());
+            return repository.save(cart);
+        });
     }
 
     @Override

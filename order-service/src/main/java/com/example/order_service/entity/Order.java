@@ -6,8 +6,8 @@ import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 
-@Entity(name = "order")
-@Table(name = "order")
+@Entity(name = "orders")
+@Table(name = "orders")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
