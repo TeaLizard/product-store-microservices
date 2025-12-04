@@ -36,6 +36,7 @@ spring:
                 - Path=/orders/**
 
 
+
 eureka:
   client:
     service-url:
