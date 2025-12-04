@@ -5,7 +5,10 @@ public class InventoryDTO {
     private Integer quantity;
 
     public InventoryDTO() {}
-    public InventoryDTO(Integer productId, Integer quantity) {}
+    public InventoryDTO(Integer productId, Integer quantity) {
+        this.productId = productId;
+        this.quantity = quantity;
+    }
 
     public Integer getProductId() {
         return productId;

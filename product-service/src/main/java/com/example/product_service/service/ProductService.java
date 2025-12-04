@@ -10,6 +10,7 @@ import java.util.List;
 @Service
 public class ProductService implements IProductService {
     private final ProductRepository repository;
+
     public ProductService(ProductRepository repository) {
         this.repository = repository;
     }
@@ -28,8 +29,8 @@ public class ProductService implements IProductService {
 
     @Override
     public Product add(Product product) {
-        repository.save(product);
-        return product;
+        return repository.save(product);
+
     }
 
     @Override
