@@ -9,21 +9,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @FeignClient(name = "inventory-service")
-@RequestMapping("/inventory")
 public interface InventoryClient {
 
-    @GetMapping
+    @GetMapping("/inventory")
     public ResponseEntity<List<InventoryDTO>> getAll();
 
-    @GetMapping("/{id}")
+    @GetMapping("/inventory/{id}")
     public ResponseEntity<InventoryDTO> getById(@PathVariable int id);
 
-    @PostMapping()
+    @PostMapping("/inventory")
     public ResponseEntity<InventoryDTO> add(@RequestBody InventoryDTO inventoryDTO);
 
-    @PutMapping("/{id}")
+    @PutMapping("/inventory/{id}")
     public ResponseEntity<InventoryDTO> update(@PathVariable int id, @RequestBody InventoryDTO inventoryDTO);
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/inventory/{id}")
     public ResponseEntity<InventoryDTO> delete(@PathVariable int id);
 }
