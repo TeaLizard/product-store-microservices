@@ -50,7 +50,7 @@ public class ProductController {
         var newInventory =  new InventoryDTO();
         newInventory.setProductId(newProduct.getId());
         newInventory.setQuantity(productDTO.getQuantity());
-        inventoryClient.add(newProduct.getId(), newInventory);
+        inventoryClient.add(newInventory);
         return ResponseEntity.ok(mapper.toDto(newProduct));
     }
 

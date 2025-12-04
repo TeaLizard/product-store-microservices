@@ -16,8 +16,8 @@ public interface InventoryClient {
     @GetMapping("/inventory/{id}")
     public ResponseEntity<InventoryDTO> getById(@PathVariable int id);
 
-    @PostMapping("/inventory/{id}")
-    public ResponseEntity<InventoryDTO> add(@PathVariable int id, @RequestBody InventoryDTO dto);
+    @PostMapping(value = "/inventory")
+    public ResponseEntity<InventoryDTO> add(@RequestBody InventoryDTO dto);
 
     @PutMapping("/inventory/{id}")
     public ResponseEntity<InventoryDTO> update(@PathVariable int id, @RequestBody InventoryDTO inventoryDTO);

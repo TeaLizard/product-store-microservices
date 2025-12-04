@@ -35,8 +35,9 @@ public class InventoryController {
         return ResponseEntity.ok(mapper.toDTO(service.getById(id)));
     }
 
-    @PostMapping("/{id}")
-    public ResponseEntity<InventoryDTO> add(@RequestBody InventoryDTO inventoryDTO, @PathVariable String id) {
+    @PostMapping()
+    public ResponseEntity<InventoryDTO> add( @RequestBody InventoryDTO inventoryDTO) {
+        System.out.println(inventoryDTO.getProductId());
         var inventory = mapper.toEntity(inventoryDTO);
         return ResponseEntity.ok(mapper.toDTO(service.add(inventory)));
     }
