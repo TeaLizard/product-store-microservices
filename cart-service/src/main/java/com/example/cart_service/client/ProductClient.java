@@ -13,15 +13,15 @@ public interface ProductClient {
     @GetMapping
     public ResponseEntity<List<ProductDTO>> getAll();
 
-    @GetMapping("/{id}")
+    @GetMapping("products/{id}")
     public ResponseEntity<ProductDTO> getById(@PathVariable int id);
 
-    @PostMapping
+    @PostMapping("/products")
     public ResponseEntity<ProductDTO> add(@RequestBody ProductDTO productDTO);
 
-    @PutMapping("/{id}")
+    @PutMapping("/product/{id}")
     public ResponseEntity<ProductDTO> update(@PathVariable int id, @RequestBody ProductDTO productDTO);
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/products/{id}")
     public ResponseEntity<ProductDTO> delete(@PathVariable int id);
 }

@@ -6,12 +6,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @FeignClient(name = "order-service")
-@RequestMapping("/orders")
 public interface OrderClient {
 
-    @GetMapping("/{id}")
+    @GetMapping("/orders/{id}")
     ResponseEntity<OrderDTO> getById(@PathVariable Integer id);
 
-    @PostMapping
+    @PostMapping("/orders")
     ResponseEntity<OrderDTO> createOrder(@RequestBody OrderDTO orderDTO);
 }
