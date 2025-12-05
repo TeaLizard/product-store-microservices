@@ -100,9 +100,8 @@ public class CartService implements ICartService {
         var cart = cartMapper.toDto(get());
         var products = cart.getProducts();
         for (var product : products) { // Updates inventory per product
-            var inventory = new InventoryDTO();
-            inventory.setProductId(product.getId());
-            inventory.setQuantity(product.getQuantity() - 1);
+            var inventory = inventoryClient.getById(product.getId()).getBody();
+            inventory.setQuantity(inventory.getQuantity() - 1);
             inventoryClient.update(product.getId(), inventory);
         }
 
